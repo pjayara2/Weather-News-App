@@ -4,7 +4,10 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "types": ["react-native", "jest"],
+    "types": [
+      "react-native",
+      "jest"
+    ],
     "lib": [
       "es2019",
       "es2020.bigint",
@@ -26,7 +29,15 @@
     "isolatedModules": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "customConditions": ["react-native"],
+    "baseUrl": "./", /* Base directory to resolve non-absolute module names. */
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ]
+    },
+    "customConditions": [
+      "react-native"
+    ],
     "allowImportingTsExtensions": true,
     "allowArbitraryExtensions": true,
     "resolveJsonModule": true,
