@@ -10,11 +10,12 @@ const ENABLE_CRYPTO = false; // Set to false to disable both encryption and decr
 
 // Base URLs for different categories
 const BASE_URLS = {
-    default: Constants.BaseURL,  // Default base URL
+    weather: Constants.WeatherBaseURL,  // Weather base URL
+    news: Constants.NewsBaseURL,  // Weather base URL
 };
 
 const FetchApis = MyHttpClient.create({
-    baseURL: BASE_URLS.default,
+    baseURL: BASE_URLS.weather,
     timeout: 20000,
     headers: {
         'Content-Type': 'application/json',
@@ -28,7 +29,7 @@ let systemInfo: any = null;
 let sessionInitialized: Promise<void>;
 
 const initializeSession = async () => {
-    const session = { userId: 1, name: 'Pradeepan', accessToken: '' }; // get value from store
+    const session = { userId: 1, name: 'Pradeepan', accessToken: null }; // get value from store
 
     if (session?.accessToken) {
         userInfo = session;
@@ -61,11 +62,13 @@ const initialize = async () => {
 
 // Function to determine the baseURL based on the request URL category
 const getBaseURLForCategory = (url: string) => {
-    if (Object.values(Constants.concateUrl.default).includes(url)) {
-        return BASE_URLS.default;  // Admin base URL
+    if (Object.values(Constants.concatUrl.weather).includes(url)) {
+        return BASE_URLS.weather;  // Weather base URL
+    } else if (Object.values(Constants.concatUrl.news).includes(url)) {
+        return BASE_URLS.news;  // Workflow base URL
     }
 
-    return BASE_URLS.default;  // Default base URL if no match
+    return BASE_URLS.weather;  // Default base URL if no match
 };
 
 // Add a request interceptor to dynamically set baseURL

@@ -1,21 +1,21 @@
-import { View, Platform } from 'react-native';
-import { useLinkBuilder, useTheme } from '@react-navigation/native';
+import { View } from 'react-native';
+import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, PlatformPressable } from '@react-navigation/elements';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';;
+import { useLinkBuilder, useTheme } from '@react-navigation/native';
 
 import { Home, News } from '@src/screens';
 import Routes from './Routes';
 
 const Tab = createBottomTabNavigator();
 
-function MyTabBar({ state, descriptors, navigation }) {
+function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
     const { colors } = useTheme();
     const { buildHref } = useLinkBuilder();
 
     return (
         <View style={{ flexDirection: 'row' }}>
-            {state.routes.map((route, index) => {
+            {state.routes.map((route: any, index: number) => {
                 const { options } = descriptors[route.key];
                 const label =
                     options.tabBarLabel !== undefined
@@ -69,7 +69,7 @@ const TabNavigation = () => {
 
     return (
         <Tab.Navigator
-            tabBar={(props) => <MyTabBar {...props} />}
+        // tabBar={(props) => <MyTabBar {...props} />}
         >
             <Tab.Screen name={Routes.Home} component={Home} />
             <Tab.Screen name={Routes.News} component={News} />

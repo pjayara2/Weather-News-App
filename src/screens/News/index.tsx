@@ -1,9 +1,131 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
-interface NewsProps {};
+import { NewsItems, NoDataComponent } from "@src/components";
+import { NewsArticle } from "@src/type/newsArticleTypes";
+import FetchApis from "@src/services/FetchApis";
+import { Constants } from "@src/common";
+import styles from "./styles";
+
+interface NewsProps { };
+
+var onEndReachedCalledDuringMomentum = true;
 
 const News: React.FC<NewsProps> = () => {
-  return <></>;
+
+    const { colors } = useTheme();
+
+    const [news, setNews] = useState<NewsArticle[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [hasMoreToLoad, setMoreToLoad] = useState<boolean>(true);
+    const [initialState, setInitialState] = useState<boolean>(true);
+    const [filters, setFilters] = useState({ from: null, to: null, sortBy: null });
+
+    const [refreshing, setRefreshing] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isFooter, setFooter] = useState<boolean>(false);
+
+    const onLoadNewsDetails = useCallback(async () => {
+        try {
+            const params = {
+                // q: '',
+                // from: '',
+                // to: '',
+                // sortBy: '',
+                apiKey: Constants.newsApiKey
+            };
+            const concatUrl = Constants.concatUrl.news.everything;
+            const response: any = await FetchApis.get(concatUrl, { params });
+            console.log("response",response);
+
+            if (response.status === 'ok') {
+                setNews(response?.articles);
+            }
+        } catch (error) {
+            console.log("error",error);
+        } finally {
+            setIsLoading(false); setRefreshing(false); setFooter(false);
+        }
+    }, [currentPage, filters]);
+
+    useEffect(() => {
+        onLoadNewsDetails();
+    }, [onLoadNewsDetails]);
+
+    const onRefreshControl = async () => {
+        setCurrentPage(1); setIsLoading(true);
+        setRefreshing(true); setInitialState(true);
+        setMoreToLoad(true);
+    };
+
+    const onEndReached = useCallback(async () => {
+        if (!hasMoreToLoad) return null;
+        if (!initialState) handleReachEnded();
+    }, [initialState, hasMoreToLoad]);
+
+    const handleReachEnded = async () => {
+        if (!onEndReachedCalledDuringMomentum) {
+            setFooter(true);
+            setInitialState(true);
+            setCurrentPage(currentPage + 1);
+            onEndReachedCalledDuringMomentum = true;
+        }
+    };
+
+    const _renderItem = useCallback(({ item, index }: { item: NewsArticle, index: number }) => (
+        <NewsItems
+            newsItem={item}
+            key={item.source.id}
+        />
+    ), []);
+
+    const _renderEmpty = useCallback(() => {
+        if (isLoading) return null;
+
+        return (
+            <NoDataComponent
+                style={[styles.emptyContainerStyle, { backgroundColor: colors.background }]}
+                imageStyle={styles.nodataImage}
+            />
+        )
+    }, []);
+
+    const _renderFooter = useCallback(() => {
+        if (!isFooter) return null;
+
+        return (
+            <ActivityIndicator
+                size={'large'}
+                color={colors.primary}
+            />
+        );
+    }, []);
+
+    const renderSeparator = useCallback(() => <View style={{ marginTop: 10 }} />, []);
+
+    return (
+        <View style={styles.contentContainerStyle}>
+            <FlatList
+                data={news}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={(item, index) => `${index}`}
+                renderItem={_renderItem}
+                ListEmptyComponent={_renderEmpty}
+                ListFooterComponent={_renderFooter}
+                ItemSeparatorComponent={renderSeparator}
+                onEndReachedThreshold={0.5}
+                onEndReached={onEndReached}
+                refreshing={refreshing}
+                onRefresh={onRefreshControl}
+                onMomentumScrollBegin={() => {
+                    onEndReachedCalledDuringMomentum = false;
+                }}
+                ListFooterComponentStyle={styles.footerStyle}
+                contentContainerStyle={styles.containerStyle}
+            />
+        </View>
+    );
 };
 
 export default News;

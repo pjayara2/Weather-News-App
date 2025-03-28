@@ -1,11 +1,14 @@
-import RootNavigation from "./src/navigation";
-import ReduxProvider from "./src/redux-store/ReduxProvider";
+import { SnackbarProvider } from "@src/contexts/SnackbarProvider";
+import ReduxProvider from "@src/redux-store/ReduxProvider";
+import RootNavigation from "@src/navigation";
 
 const App = () => {
 
     return (
         <ReduxProvider>
-            <RootNavigation />
+            <SnackbarProvider>
+                <RootNavigation />
+            </SnackbarProvider>
         </ReduxProvider>
     );
 }
