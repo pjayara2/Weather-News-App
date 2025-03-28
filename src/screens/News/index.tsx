@@ -36,14 +36,19 @@ const News: React.FC<NewsProps> = () => {
                 apiKey: Constants.newsApiKey
             };
             const concatUrl = Constants.concatUrl.news.everything;
-            const response: any = await FetchApis.get(concatUrl, { params });
-            console.log("response",response);
+
+            // const response: any = await fetch(`https://newsapi.org/v2/everything?q=apple&from=2025-03-27&to=2025-03-27&sortBy=popularity&apiKey=12ccc2c1783e4bbf96d5b75a6aae5aff`)
+            //     .then(data => data.json())
+            //     .then(res => console.log(res))
+
+            const response: any = await FetchApis.get(concatUrl, {  });
+            console.log("response", response);
 
             if (response.status === 'ok') {
                 setNews(response?.articles);
             }
         } catch (error) {
-            console.log("error",error);
+            console.log("error", error);
         } finally {
             setIsLoading(false); setRefreshing(false); setFooter(false);
         }
