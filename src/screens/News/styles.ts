@@ -5,7 +5,6 @@ import { Styles } from "@src/common";
 const styles = StyleSheet.create({
     contentContainerStyle: {
         flexGrow: 1,
-        backgroundColor: 'red'
     },
     containerStyle: {
         flexGrow: 1,

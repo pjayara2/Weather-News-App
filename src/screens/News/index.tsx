@@ -5,7 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { NewsItems, NoDataComponent } from "@src/components";
 import { NewsArticle } from "@src/type/newsArticleTypes";
 import FetchApis from "@src/services/FetchApis";
-import { Constants } from "@src/common";
+import { Constants, Styles } from "@src/common";
 import styles from "./styles";
 
 interface NewsProps { };
@@ -37,15 +37,12 @@ const News: React.FC<NewsProps> = () => {
             };
             const concatUrl = Constants.concatUrl.news.everything;
 
-            // const response: any = await fetch(`https://newsapi.org/v2/everything?q=apple&from=2025-03-27&to=2025-03-27&sortBy=popularity&apiKey=12ccc2c1783e4bbf96d5b75a6aae5aff`)
-            //     .then(data => data.json())
-            //     .then(res => console.log(res))
+            const response: any = await fetch(`https://newsapi.org/v2/everything?q=apple&from=2025-03-27&to=2025-03-27&sortBy=popularity&apiKey=12ccc2c1783e4bbf96d5b75a6aae5aff`);
+            const data = await response.json();
+            console.log(data);
 
-            const response: any = await FetchApis.get(concatUrl, {  });
-            console.log("response", response);
-
-            if (response.status === 'ok') {
-                setNews(response?.articles);
+            if (data.status === 'ok') {
+                setNews(data?.articles);
             }
         } catch (error) {
             console.log("error", error);
@@ -109,8 +106,18 @@ const News: React.FC<NewsProps> = () => {
 
     const renderSeparator = useCallback(() => <View style={{ marginTop: 10 }} />, []);
 
+    if (isLoading) {
+        return (
+            <ActivityIndicator
+                size={'large'}
+                color={colors.primary}
+                style={[Styles.indicatorStyle, { backgroundColor: colors.background }]}
+            />
+        );
+    }
+
     return (
-        <View style={styles.contentContainerStyle}>
+        <View style={[styles.contentContainerStyle, { backgroundColor: colors.background }]}>
             <FlatList
                 data={news}
                 showsVerticalScrollIndicator={false}

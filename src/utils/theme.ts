@@ -11,6 +11,7 @@ export const lightTheme: CustomTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
+        primary: '#cc0001'
     },
 };
 

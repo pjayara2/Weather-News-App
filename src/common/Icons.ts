@@ -1,5 +1,6 @@
 const Ionicons = {
-
+    newsFeed: 'newspaper-outline',
+    weather: 'weather-cloudy'
 };
 
 const FontAwesome = {
