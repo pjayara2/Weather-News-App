@@ -10,7 +10,6 @@ const Styles = StyleSheet.create({
     height: Platform.OS !== "ios" ? height : height - 20,
 
     tabBarContainerStyle: {
-        height: 50,
         flexDirection: 'row',
         elevation: 15,
     },
