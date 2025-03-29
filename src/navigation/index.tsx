@@ -5,6 +5,7 @@ import { StatusBar, useColorScheme } from 'react-native';
 
 import { darkTheme, lightTheme } from '@src/utils/theme';
 import TabNavigation from './TabNavigation';
+import { Splash } from '@src/screens';
 import Routes from './Routes';
 
 const RootStack = createNativeStackNavigator();
@@ -21,6 +22,11 @@ const App = () => {
                 translucent={false}
             />
             <RootStack.Navigator>
+                <RootStack.Screen
+                    name={Routes.Splash}
+                    component={Splash}
+                    options={{ headerShown: false }}
+                />
                 <RootStack.Screen
                     name={Routes.TabNavigation}
                     component={TabNavigation}

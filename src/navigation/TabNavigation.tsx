@@ -4,7 +4,7 @@ import { Text, PlatformPressable } from '@react-navigation/elements';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
-import { Icons, Styles } from '@src/common';
+import { Fonts, Icons, Styles } from '@src/common';
 import { Home, News } from '@src/screens';
 import Routes from './Routes';
 
@@ -66,15 +66,23 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                         testID={options.tabBarButtonTestID}
                         onPress={onPress}
                         onLongPress={onLongPress}
+                        pressOpacity={1}
                         style={{ flex: 1, alignItems: 'center' }}
                     >
                         <Icon
                             type={'ionicon'}
                             name={'home-outline'}
-                            containerStyle={{ marginTop: 20 }}
+                            containerStyle={{}}
                             color={isFocused ? colors.primary : colors.text}
                         />
-                        <Text style={{ color: isFocused ? colors.primary : colors.text }}>
+                        <Text
+                            style={{
+                                marginTop: 2,
+                                fontSize: 12,
+                                fontFamily: Fonts.Poppins.Medium,
+                                color: isFocused ? colors.primary : colors.text
+                            }}
+                        >
                             {label}
                         </Text>
                     </PlatformPressable>

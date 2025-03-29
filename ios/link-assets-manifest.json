@@ -32,6 +32,10 @@
     {
       "path": "assets/fonts/Poppins-SemiBold.ttf",
       "sha1": "20b39c8b480c946b084d6aa09f12bf10b2ec5aa6"
+    },
+    {
+      "path": "assets/fonts/Poppins-Thin.ttf",
+      "sha1": "c5c36432a1d00d653bde8a47f4c99171f02362e8"
     }
   ]
 }

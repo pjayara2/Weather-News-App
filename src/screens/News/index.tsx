@@ -5,6 +5,8 @@ import { useTheme } from "@react-navigation/native";
 import { NewsItems, NoDataComponent } from "@src/components";
 import { NewsArticle } from "@src/type/newsArticleTypes";
 import FetchApis from "@src/services/FetchApis";
+import { handleApiError } from "@src/utils/commonUtils";
+import { useSnackbar } from "@src/hooks/useSnackbar";
 import { Constants, Styles } from "@src/common";
 import styles from "./styles";
 
@@ -15,6 +17,7 @@ var onEndReachedCalledDuringMomentum = true;
 const News: React.FC<NewsProps> = () => {
 
     const { colors } = useTheme();
+    const snackbar = useSnackbar();
 
     const [news, setNews] = useState<NewsArticle[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -29,23 +32,18 @@ const News: React.FC<NewsProps> = () => {
     const onLoadNewsDetails = useCallback(async () => {
         try {
             const params = {
-                // q: '',
-                // from: '',
-                // to: '',
-                // sortBy: '',
                 apiKey: Constants.newsApiKey
             };
             const concatUrl = Constants.concatUrl.news.everything;
-
             const response: any = await fetch(`https://newsapi.org/v2/everything?q=apple&from=2025-03-27&to=2025-03-27&sortBy=popularity&apiKey=12ccc2c1783e4bbf96d5b75a6aae5aff`);
+            // const response: any = await FetchApis.get(concatUrl, { params });
             const data = await response.json();
-            console.log(data);
 
             if (data.status === 'ok') {
                 setNews(data?.articles);
             }
-        } catch (error) {
-            console.log("error", error);
+        } catch (error: any) {
+            handleApiError(error, snackbar);
         } finally {
             setIsLoading(false); setRefreshing(false); setFooter(false);
         }
