@@ -1,5 +1,7 @@
 import React, { memo } from "react";
 import { View, ImageStyle, StyleSheet, ViewStyle } from "react-native";
+import AnimatedLottieView from 'lottie-react-native';
+
 import { Styles } from "@src/common";
 
 interface NoDataProps {
@@ -10,12 +12,13 @@ interface NoDataProps {
 const NoDataComponent: React.FC<NoDataProps> = memo(({ style = {}, imageStyle = {} }) => {
     return (
         <View style={[styles.emptyContainerStyle, style]}>
-            {/* <Image
-                alt={'No-data'}
-                resizeMode="contain"
-                source={Images.noData}
-                style={[styles.imageStyle, imageStyle]}
-            /> */}
+            <AnimatedLottieView
+                autoPlay={true}
+                duration={4000}
+                loop={true}
+                source={require("@src/../assets/lottie/no-data.json")}
+                style={[imageStyle, styles.imageStyle]}
+            />
         </View>
     );
 });

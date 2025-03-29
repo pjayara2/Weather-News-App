@@ -59,13 +59,13 @@ FetchApis.interceptors.request.use(async (config: AxiosRequestConfig | any) => {
 
 // Add a response interceptor
 FetchApis.interceptors.response.use(async (response: AxiosResponse) => {
-    if (DEBUG) console.log("✉️ ", response);
+    if (DEBUG) console.log("✉️ ", response.data);
 
     if (response?.data?.status === 401) {
         // handle logout
     }
 
-    return response;
+    return response.data;
 }, async (error: AxiosError) => {
     if (DEBUG) console.log("response", error);
     if (error?.response?.status === 401) {

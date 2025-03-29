@@ -4,8 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar, useColorScheme } from 'react-native';
 
 import { darkTheme, lightTheme } from '@src/utils/theme';
+import { Splash, NewsDetails } from '@src/screens';
 import TabNavigation from './TabNavigation';
-import { Splash } from '@src/screens';
+import { Styles } from '@src/common';
 import Routes from './Routes';
 
 const RootStack = createNativeStackNavigator();
@@ -21,7 +22,11 @@ const App = () => {
                 barStyle={"light-content"}
                 translucent={false}
             />
-            <RootStack.Navigator>
+            <RootStack.Navigator screenOptions={{
+                headerShown: true,
+                headerStyle: Styles.headerStyle as any,
+                headerTitleStyle: Styles.headerTitleStyle as any,
+            }}>
                 <RootStack.Screen
                     name={Routes.Splash}
                     component={Splash}
@@ -31,6 +36,11 @@ const App = () => {
                     name={Routes.TabNavigation}
                     component={TabNavigation}
                     options={{ headerShown: false }}
+                />
+                <RootStack.Screen
+                    name={Routes.NewsDetails}
+                    component={NewsDetails}
+                    options={{ headerTitleAlign: 'left', headerTintColor: '#FFF' }}
                 />
             </RootStack.Navigator>
         </NavigationContainer>

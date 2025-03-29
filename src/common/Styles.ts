@@ -24,9 +24,11 @@ const Styles = StyleSheet.create({
     },
     headerStyle: {
         elevation: 5,
+        backgroundColor: '#cc0001'
     },
     headerTitleStyle: {
-        fontSize: 16,
+        fontSize: 13,
+        color: '#FFF',
         fontFamily: Fonts.Poppins.Medium
     },
     indicatorStyle: {

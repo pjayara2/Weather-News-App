@@ -50,16 +50,17 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                 const getNameIcon = () => {
                     switch (index) {
                         case 0:
-                            return Icons.Ionicons.weather;
+                            return Icons.MaterialCommunityIcons.weather;
                         case 1:
-                            return Icons.Ionicons.newsFeed;
+                            return Icons.MaterialCommunityIcons.newsFeed;
                         default:
-                            return Icons.Ionicons.newsFeed;
+                            return Icons.MaterialCommunityIcons.newsFeed;
                     }
                 };
 
                 return (
                     <PlatformPressable
+                        key={index}
                         href={buildHref(route.name, route.params)}
                         accessibilityState={isFocused ? { selected: true } : {}}
                         accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -70,9 +71,10 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                         style={{ flex: 1, alignItems: 'center' }}
                     >
                         <Icon
-                            type={'ionicon'}
-                            name={'home-outline'}
-                            containerStyle={{}}
+                            type={'material-community'}
+                            name={getNameIcon()}
+                            containerStyle={{ marginTop: 10 }}
+                            size={25}
                             color={isFocused ? colors.primary : colors.text}
                         />
                         <Text
@@ -105,7 +107,7 @@ const TabNavigation = () => {
                 headerShown: true,
                 headerTitleAlign: 'center',
                 headerStyle: [Styles.headerStyle, { backgroundColor: colors.primary }],
-                headerTitleStyle: [Styles.headerTitleStyle, { color: colors.background }],
+                headerTitleStyle: [Styles.headerTitleStyle, { color: colors.text }],
             })}
             tabBar={(props) => <MyTabBar {...props} />}
         >

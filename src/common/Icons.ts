@@ -1,6 +1,6 @@
 const Ionicons = {
     newsFeed: 'newspaper-outline',
-    weather: 'weather-cloudy',
+    weather: 'cloud-circle-outline',
     time: 'time-outline'
 };
 
@@ -9,7 +9,10 @@ const FontAwesome = {
 };
 
 const MaterialCommunityIcons = {
-
+    newsFeed: 'newspaper-variant-multiple',
+    weather: 'weather-cloudy',
+    time: 'clock-outline',
+    typewriter: 'typewriter'
 };
 
 const MaterialIcons = {

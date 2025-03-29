@@ -11,12 +11,12 @@ import { Constants, Styles } from "@src/common";
 import Routes from "@src/navigation/Routes";
 import styles from "./styles";
 
-interface NewsProps { };
+interface NewsFeedProps { };
 
 const perPage = 100;
 var onEndReachedCalledDuringMomentum = true;
 
-const News: React.FC<NewsProps> = () => {
+const NewsFeed: React.FC<NewsFeedProps> = () => {
 
     const { colors } = useTheme();
     const snackbar = useSnackbar();
@@ -157,4 +157,4 @@ const News: React.FC<NewsProps> = () => {
     );
 };
 
-export default News;
+export default NewsFeed;

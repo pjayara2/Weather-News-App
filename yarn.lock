@@ -1572,6 +1572,11 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
+"@react-native-community/geolocation@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-3.4.0.tgz#8b6ee024a71cf94526ab796af1e9ae140684802c"
+  integrity sha512-bzZH89/cwmpkPMKKveoC72C4JH0yF4St5Ceg/ZM9pA1SqX9MlRIrIrrOGZ/+yi++xAvFDiYfihtn9TvXWU9/rA==
+
 "@react-native-masked-view/masked-view@^0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.3.2.tgz#7064533a573e3539ec912f59c1f457371bf49dd9"
@@ -4963,6 +4968,11 @@ loose-envify@^1.0.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lottie-react-native@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-7.2.2.tgz#f328526dba9a36ba8c908aed9d3f68a8d3e0ec41"
+  integrity sha512-pp3dnFVFZlfZzIL5qKGXju2d6RfnYhPbb8xQL9dYqvPbPy2EbnK2aFlv6jAZLYh0QjUGPEmRAgAAnsOOtT+H9Q==
+
 lru-cache@^10.2.0:
   version "10.4.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.4.3.tgz#410fc8a17b70e598013df257c2446b7f3383f119"
@@ -5296,6 +5306,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
 ms@2.0.0:
   version "2.0.0"
@@ -5855,6 +5870,11 @@ react-native-localization@^2.3.2:
   integrity sha512-9i2wkCFwvKVXq0w6tu1eTCGUZuKBQXoCGWBWbW4HYsFJe+MEQsFCYdrhoBsn8IAr/KA9AYUiEyxxuN3hLRxF4w==
   dependencies:
     react-localization "^1.0.17"
+
+react-native-permissions@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-5.3.0.tgz#987ec347d312306b4aeca548996a16f6f129992d"
+  integrity sha512-krDaImQ7J8tm7P+GqKmTIkojNqdO0E6v2x7TOlX/7rRc/zlpoqRXsN7210ecChcUmEOJEH6wzPcemYq+7AfZiw==
 
 react-native-ratings@8.0.4:
   version "8.0.4"

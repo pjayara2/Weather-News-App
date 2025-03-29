@@ -3,6 +3,8 @@ const Routes = {
     Home: 'Home',
     News: 'News',
     TabNavigation: "TabNavigation",
+    NewsDetails: "NewsDetails"
+
 } as const;
 
 export default Routes;

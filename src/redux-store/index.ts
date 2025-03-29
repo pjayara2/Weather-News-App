@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Import all the reducers
 import { weatherReducer } from "./slice/weather";
 import { newsReducer } from "./slice/news";
+import { gpsReducer } from "./slice/gps";
 
 const persistConfig = {
     key: "root",
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     weather: weatherReducer,
     news: newsReducer,
+    gps: gpsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
