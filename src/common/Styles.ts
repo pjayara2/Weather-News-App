@@ -27,7 +27,7 @@ const Styles = StyleSheet.create({
         backgroundColor: '#cc0001'
     },
     headerTitleStyle: {
-        fontSize: 13,
+        fontSize: 14,
         color: '#FFF',
         fontFamily: Fonts.Poppins.Medium
     },

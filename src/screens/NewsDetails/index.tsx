@@ -68,7 +68,7 @@ const NewsDetails: React.FC<NewsDetailsProps> = () => {
                             {newsFeed?.author}
                         </Text>
                     </View>
-                    <View style={[styles.publishAtStyle, { marginLeft: 5 }]}>
+                    <View style={[styles.publishAtStyle, { flex: 1, marginLeft: 5 }]}>
                         <Icon
                             type={'material-community'}
                             name={Icons.MaterialCommunityIcons.time}

@@ -4,7 +4,8 @@ import { DefaultTheme, DarkTheme, Theme } from '@react-navigation/native';
 export interface CustomTheme extends Theme {
     colors: Theme['colors'] & {
         yellow: string,
-        gray: string
+        gray: string,
+        white: string
     };
 }
 
@@ -15,7 +16,8 @@ export const lightTheme: CustomTheme = {
         primary: '#cc0001',
         text: '#404040',
         yellow: '#fbb910',
-        gray: '#737373'
+        gray: '#737373',
+        white: '#FFF'
     },
 };
 
@@ -26,6 +28,7 @@ export const darkTheme: CustomTheme = {
         primary: '#cc0001',
         text: '#404040',
         yellow: '#fbb910',
-        gray: '#737373'
+        gray: '#737373',
+        white: '#FFF'
     },
 };

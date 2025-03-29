@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar, useColorScheme } from 'react-native';
 
+import { Splash, NewsDetails, NewsFeed } from '@src/screens';
 import { darkTheme, lightTheme } from '@src/utils/theme';
-import { Splash, NewsDetails } from '@src/screens';
 import TabNavigation from './TabNavigation';
 import { Styles } from '@src/common';
 import Routes from './Routes';
@@ -36,6 +36,11 @@ const App = () => {
                     name={Routes.TabNavigation}
                     component={TabNavigation}
                     options={{ headerShown: false }}
+                />
+                <RootStack.Screen
+                    name={Routes.NewsFeed}
+                    component={NewsFeed}
+                    options={{ title: 'News Feed', headerTintColor: '#FFF' }}
                 />
                 <RootStack.Screen
                     name={Routes.NewsDetails}

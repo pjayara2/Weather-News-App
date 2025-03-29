@@ -52,9 +52,14 @@ const extraReducers = (builder: any) => {
         });
 };
 
-export const { actions: gpsActions, reducer: gpsReducer } = createSlice({
+const selectors = {
+    selectCoords: (state: GpsState) => state.coords,
+}
+
+export const { actions: gpsActions, reducer: gpsReducer, selectors: gpsSelectors } = createSlice({
     name: 'gps',
     initialState,
     reducers,
+    selectors,
     extraReducers,
 });

@@ -5,7 +5,7 @@ import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
 import { Fonts, Icons, Styles } from '@src/common';
-import { Home, News } from '@src/screens';
+import { Weather, News } from '@src/screens';
 import Routes from './Routes';
 
 const Tab = createBottomTabNavigator();
@@ -100,7 +100,6 @@ const TabNavigation = () => {
 
     return (
         <Tab.Navigator
-            initialRouteName='News'
             backBehavior={'initialRoute'}
             screenOptions={({ route }) => ({
                 lazy: true,
@@ -111,7 +110,7 @@ const TabNavigation = () => {
             })}
             tabBar={(props) => <MyTabBar {...props} />}
         >
-            <Tab.Screen name={Routes.Home} component={Home} options={{ title: 'Weather' }} />
+            <Tab.Screen name={Routes.Weather} component={Weather} options={{ title: 'Weather' }} />
             <Tab.Screen name={Routes.News} component={News} options={{ title: 'News Feed' }} />
         </Tab.Navigator>
     );

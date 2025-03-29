@@ -1,7 +1,8 @@
 const Routes = {
     Splash: 'Splash',
-    Home: 'Home',
+    Weather: 'Weather',
     News: 'News',
+    NewsFeed: 'NewsFeed',
     TabNavigation: "TabNavigation",
     NewsDetails: "NewsDetails"
 

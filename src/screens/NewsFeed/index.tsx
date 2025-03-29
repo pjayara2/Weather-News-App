@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { NavigationProp, useNavigation, useTheme } from "@react-navigation/native";
+import { NavigationProp, useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import { ActivityIndicator, FlatList, View } from "react-native";
 
 import { NewsItems, NoDataComponent } from "@src/components";
@@ -8,6 +8,7 @@ import FetchApis from "@src/services/FetchApis";
 import { handleApiError } from "@src/utils/commonUtils";
 import { useSnackbar } from "@src/hooks/useSnackbar";
 import { Constants, Styles } from "@src/common";
+import { CustomTheme } from "@src/utils/theme";
 import Routes from "@src/navigation/Routes";
 import styles from "./styles";
 
@@ -18,31 +19,30 @@ var onEndReachedCalledDuringMomentum = true;
 
 const NewsFeed: React.FC<NewsFeedProps> = () => {
 
-    const { colors } = useTheme();
+    const { colors } = useTheme() as CustomTheme;
     const snackbar = useSnackbar();
     const navigation = useNavigation<NavigationProp<any>>();
+    const { params } = useRoute<any>();
 
     const [news, setNews] = useState<NewsArticle[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(2);
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const [hasMoreToLoad, setMoreToLoad] = useState<boolean>(true);
     const [initialState, setInitialState] = useState<boolean>(true);
-    const [filters, setFilters] = useState({ sortBy: 'popularity', from: null, to: null });
 
     const [refreshing, setRefreshing] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isFooter, setFooter] = useState<boolean>(false);
 
     const onLoadNewsDetails = useCallback(async () => {
         try {
-            const params = {
+            const data = {
                 apiKey: Constants.newsApiKey,
                 pageSize: perPage,
                 page: currentPage,
-                sortBy: filters?.sortBy,
-                q: 'apple',
+                category: params?.category || 'general',
             };
-            const concatUrl = Constants.concatUrl.news.everything;
-            const response: any = await FetchApis.get(concatUrl, { params });
+            const concatUrl = Constants.concatUrl.news.headlines;
+            const response: any = await FetchApis.get(concatUrl, { params: data });
 
             if (response.status === 'ok') {
                 const articles = response?.articles || [];
@@ -55,7 +55,7 @@ const NewsFeed: React.FC<NewsFeedProps> = () => {
         } finally {
             setIsLoading(false); setRefreshing(false); setFooter(false);
         }
-    }, [currentPage, filters]);
+    }, [currentPage]);
 
     useEffect(() => {
         onLoadNewsDetails();
@@ -65,10 +65,9 @@ const NewsFeed: React.FC<NewsFeedProps> = () => {
         setCurrentPage(1);
         setIsLoading(true);
         setRefreshing(true);
-        setInitialState(true);
-        setMoreToLoad(true);
+        setNews([]);
 
-        setTimeout(() => { if (currentPage == 1) onLoadNewsDetails(); }, 0);
+        setTimeout(async () => { if (currentPage == 1) await onLoadNewsDetails(); }, 0);
     }, [currentPage]);
 
     const onEndReached = useCallback(async () => {
@@ -100,8 +99,13 @@ const NewsFeed: React.FC<NewsFeedProps> = () => {
     ), []);
 
     const _renderEmpty = useCallback(() => {
-        if (isLoading) return null;
-
+        if (isLoading) return (
+            <ActivityIndicator
+                size={'large'}
+                color={colors.primary}
+                style={[Styles.indicatorStyle, { backgroundColor: colors.background }]}
+            />
+        );
         return (
             <NoDataComponent
                 style={[styles.emptyContainerStyle, { backgroundColor: colors.background }]}
@@ -122,16 +126,6 @@ const NewsFeed: React.FC<NewsFeedProps> = () => {
     }, []);
 
     const renderSeparator = useCallback(() => <View style={{ marginTop: 10 }} />, []);
-
-    if (isLoading) {
-        return (
-            <ActivityIndicator
-                size={'large'}
-                color={colors.primary}
-                style={[Styles.indicatorStyle, { backgroundColor: colors.background }]}
-            />
-        );
-    }
 
     return (
         <View style={[styles.contentContainerStyle, { backgroundColor: colors.background }]}>
